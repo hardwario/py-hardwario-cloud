@@ -28,13 +28,13 @@ def command_create(ctx, name):
 @click.pass_context
 def command_upload(ctx, id, name, note, decoder_type, decoder):
     '''Upload codec.'''
-    decoder = decoder.read()
+    decoder = decoder.read().strip()
     if decoder_type == 'cbor':
         try:
             json.loads(decoder)
         except Exception as e:
             raise Exception(f'Invalid JSON: {e}')
-    resp = ctx.obj['api'].codec_update(id, name, note, decoder_type, )
+    resp = ctx.obj['api'].codec_update(id, name, note, decoder_type, decoder)
     click.echo('OK')
 
 
