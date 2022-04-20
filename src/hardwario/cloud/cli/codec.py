@@ -1,5 +1,5 @@
 import logging
-import json
+import yaml
 import click
 
 logger = logging.getLogger(__name__)
@@ -31,7 +31,7 @@ def command_upload(ctx, id, name, note, decoder_type, decoder):
     decoder = decoder.read().strip()
     if decoder_type == 'cbor':
         try:
-            json.loads(decoder)
+            yaml.safe_load(decoder)
         except Exception as e:
             raise Exception(f'Invalid JSON: {e}')
     resp = ctx.obj['api'].codec_update(id, name, note, decoder_type, decoder)
