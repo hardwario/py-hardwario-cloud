@@ -1,10 +1,8 @@
-import logging
 import sys
 import click
+from loguru import logger
 from . import codec
 from ..api import Api, DEFAULT_API_URL
-
-logger = logging.getLogger(__name__)
 
 
 @click.group(name='cloud', help='Commands for CLOUD.')

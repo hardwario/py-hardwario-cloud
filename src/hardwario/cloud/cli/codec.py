@@ -1,8 +1,6 @@
-import logging
 import yaml
 import click
-
-logger = logging.getLogger(__name__)
+from loguru import logger
 
 
 @click.group(name='codec')
