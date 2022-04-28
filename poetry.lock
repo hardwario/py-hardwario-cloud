@@ -61,7 +61,7 @@ immutables = ">=0.9"
 
 [[package]]
 name = "hardwario-common"
-version = "1.6.0"
+version = "1.6.1"
 description = "HARDWARIO Common"
 category = "main"
 optional = false
@@ -206,7 +206,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.6"
-content-hash = "3a4ada79e3c6ee723e878065293592c29b533f7a143b520fb9ca461820c4462c"
+content-hash = "752822e080106322fdea6328799897a4802baecc32f7e629dd67407ac564a7c6"
 
 [metadata.files]
 aiocontextvars = [
@@ -233,8 +233,8 @@ contextvars = [
     {file = "contextvars-2.4.tar.gz", hash = "sha256:f38c908aaa59c14335eeea12abea5f443646216c4e29380d7bf34d2018e2c39e"},
 ]
 hardwario-common = [
-    {file = "hardwario-common-1.6.0.tar.gz", hash = "sha256:864852d62c3d6f5f8a1cbbbd05e86f164380a9b2d546ba72f97bf79b604a9e4d"},
-    {file = "hardwario_common-1.6.0-py3-none-any.whl", hash = "sha256:c6b34c4ad4c9df954b31a513294d7d48f566f08d989add477a6a9c6e997ab2ff"},
+    {file = "hardwario-common-1.6.1.tar.gz", hash = "sha256:8437c1e78395c484993b805096f4baf95e2cecf02e479fdc4e1ef2ac9d4de301"},
+    {file = "hardwario_common-1.6.1-py3-none-any.whl", hash = "sha256:8c97ae18fb77d136e6e7282d5aadfcb34e85f403d9ba1a7d1cf3e3be0d75390b"},
 ]
 idna = [
     {file = "idna-3.3-py3-none-any.whl", hash = "sha256:84d9dd047ffa80596e0f246e2eab0b391788b0503584e8945f2368256d2735ff"},
