@@ -93,3 +93,12 @@ class Api:
 
     def codec_attach_to_group(self, id, group_id):
         return self.request('PUT', f'/v1/group/{group_id}', json={'codec_id': id})
+
+    def codec_authors(self, id):
+        return self.request('GET', f'/v1/codec/{id}/authors')
+
+    def codec_author_add(self, id, author_id):
+        return self.request('POST', f'/v1/codec/{id}/authors', json={'author_id': author_id})
+
+    def codec_author_remove(self, id, author_id):
+        return self.request('DELETE', f'/v1/codec/{id}/author/{author_id}')

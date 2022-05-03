@@ -40,9 +40,9 @@ def command_upload(ctx, id, name, note, decoder_type, decoder):
 @click.pass_context
 def command_list(ctx):
     '''List of codec.'''
-    codecs = ctx.obj['api'].codec_list(fields=['id', 'name'])
+    codecs = ctx.obj['api'].codec_list(fields=['id', 'name', 'author_ids'])
     for codec in codecs:
-        line = f'{codec["id"]} {codec["name"]}'.strip()
+        line = f'{codec["id"]} [authors: {len(codec["author_ids"])}] {codec["name"]}'.strip()
         click.echo(line)
 
 
@@ -93,3 +93,37 @@ def command_attach(ctx, id, device_id, group_id):
         if resp['codec_id'] != id:
             raise Exception('Save Error')
         click.echo('OK')
+
+
+@cli.group(name='author')
+def author():
+    '''Autor commands.'''
+
+
+@author.command('list')
+@click.option('--id', metavar="ID", required=True)
+@click.pass_context
+def command_autor_list(ctx, id):
+    '''List of authors.'''
+    for author in ctx.obj['api'].codec_authors(id):
+        click.echo(f'{author["id"]} <{author["email"]}> {author["name"]}')
+
+
+@author.command('add')
+@click.option('--id', metavar="ID", required=True)
+@click.option('--author-id', metavar="ID", required=True)
+@click.pass_context
+def command_autor_add(ctx, id, author_id):
+    '''Add author.'''
+    for author in ctx.obj['api'].codec_author_add(id, author_id):
+        click.echo(f'{author["id"]} <{author["email"]}> {author["name"]}')
+
+
+@author.command('remove')
+@click.option('--id', metavar="ID", required=True)
+@click.option('--author-id', metavar="ID", required=True)
+@click.pass_context
+def command_autor_remove(ctx, id, author_id):
+    '''Remove author.'''
+    for author in ctx.obj['api'].codec_author_remove(id, author_id):
+        click.echo(f'{author["id"]} <{author["email"]}> {author["name"]}')
