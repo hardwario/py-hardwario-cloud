@@ -2,6 +2,7 @@ import sys
 import click
 from loguru import logger
 from . import codec
+from . import message
 from ..api import Api, DEFAULT_API_URL
 
 
@@ -14,6 +15,7 @@ def cli(ctx, url, token):
 
 
 cli.add_command(codec.cli)
+cli.add_command(message.cli)
 
 
 def main():

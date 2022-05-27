@@ -21,7 +21,7 @@ def command_create(ctx, name):
 @click.option('--id', metavar="ID", required=True)
 @click.option('--name', type=str)
 @click.option('--note', type=str)
-@click.option('--decoder-type', type=click.Choice(['cbor', ' protobuf', 'javascript']), required=True)
+@click.option('--decoder-type', type=click.Choice(['cbor', 'protobuf', 'javascript']), required=True)
 @click.option('--decoder', type=click.File('r'), required=True)
 @click.pass_context
 def command_upload(ctx, id, name, note, decoder_type, decoder):
