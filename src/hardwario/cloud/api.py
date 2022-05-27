@@ -1,5 +1,6 @@
 import requests
 from loguru import logger
+from . import utils
 
 DEFAULT_API_URL = 'https://api.hardwario.cloud'
 
@@ -78,6 +79,9 @@ class Api:
 
     def codec_list(self, fields: list = None, offset: int = 0, limit: int = None):
         params = {}
+        if 'sort_order' in params and params['sort_order'] not in ('asc', 'desc'):
+            raise ApiException('Bad sort_order allowed values are "asc" or "desc"')
+
         if fields:
             params['fields'] = ','.join(fields)
         return self._list('/v1/codecs', params, offset, limit)
@@ -102,3 +106,23 @@ class Api:
 
     def codec_author_remove(self, id, author_id):
         return self.request('DELETE', f'/v1/codec/{id}/author/{author_id}')
+
+    def message_list(self, group_id=None, device_id=None,
+                     since=None, before=None,
+                     offset: int = 0, limit: int = None,
+                     sort_field='created_at', sort_order='desc'):
+        params = {
+            'sort_field': sort_field,
+            'sort_order': sort_order
+        }
+        if device_id:
+            params['device_id'] = device_id
+        elif group_id:
+            params['group_id'] = group_id
+        else:
+            raise ApiException('Set group_id or device_id')
+        if since:
+            params['since'] = utils.get_timestamp(since)
+        if before:
+            params['before'] = utils.get_timestamp(before)
+        return self._list('/v1/messages', params, offset, limit)
