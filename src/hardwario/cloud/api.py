@@ -126,3 +126,26 @@ class Api:
         if before:
             params['before'] = utils.get_timestamp(before)
         return self._list('/v1/messages', params, offset, limit)
+
+    def organizations_list(self, offset: int = 0, limit: int = None):
+        params = {
+            'sort_field': 'name',
+            'sort_order': 'asc'
+        }
+        return self._list('/v1/organizations', params, offset, limit)
+
+    def groups_list(self, organization_id, offset: int = 0, limit: int = None):
+        params = {
+            'organization_id': organization_id,
+            'sort_field': 'name',
+            'sort_order': 'asc',
+        }
+        return self._list('/v1/groups', params, offset, limit)
+
+    def devices_list(self, group_id, offset: int = 0, limit: int = None):
+        params = {
+            'group_id': group_id,
+            'sort_field': 'label',
+            'sort_order': 'asc',
+        }
+        return self._list('/v1/devices', params, offset, limit)
