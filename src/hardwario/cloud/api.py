@@ -45,14 +45,16 @@ class Api:
         while True:
             params['limit'] = 100 if limit is None else limit
 
-            for row in self.request('GET', url, params=params):
+            response = self.request('GET', url, params=params)
+            x_total = int(self._response.headers['x-total'])
+
+            for row in response:
                 cnt += 1
                 yield row
 
             if limit is not None and limit >= cnt:
                 break
 
-            x_total = int(self._response.headers['x-total'])
             params['offset'] = offset + cnt
 
             if params['offset'] >= x_total:
